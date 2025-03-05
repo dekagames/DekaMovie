@@ -60,32 +60,31 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <AndroidResource Remove="Infra\Helpers\**" />
-	  <Compile Remove="Infra\Helpers\**" />
-	  <EmbeddedResource Remove="Infra\Helpers\**" />
-	  <MauiCss Remove="Infra\Helpers\**" />
-	  <MauiXaml Remove="Infra\Helpers\**" />
-	  <None Remove="Infra\Helpers\**" />
+	  <MauiAsset Remove="Resources\Raw\appsettings.json" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <EmbeddedResource Include="Resources\Raw\appsettings.json" />
+	</ItemGroup>
+	
 	<ItemGroup>
 		<PackageReference Include="CommunityToolkit.Mvvm" Version="8.4.0" />
-		<PackageReference Include="CommunityToolkit.Maui.Core" Version="11.1.0" />		
+		<PackageReference Include="CommunityToolkit.Maui" Version="11.1.0" />			
 		<PackageReference Include="Microsoft.Extensions.Logging.Debug" Version="9.0.2" />
+		<PackageReference Include="Microsoft.Maui.Controls" Version="9.0.40" />
 		<PackageReference Include="Microsoft.Maui.Essentials" Version="9.0.40" />
-		<PackageReference Include="Refit" Version="8.0.0" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <PackageReference Update="Microsoft.Maui.Controls" Version="9.0.40" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <Folder Include="Infra\Services\" />
+		<PackageReference Include="Flurl.Http" Version="4.0.2" />
+		<PackageReference Include="Polly" Version="8.5.2" />
 	</ItemGroup>
 
 	<ItemGroup>
 	  <MauiXaml Update="Features\Home\HomePage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Features\Login\LoginPage.xaml">
+	    <Generator>MSBuild:Compile</Generator>
+	  </MauiXaml>
+	  <MauiXaml Update="Features\Search\SearchPage.xaml">
 	    <Generator>MSBuild:Compile</Generator>
 	  </MauiXaml>
 	</ItemGroup>

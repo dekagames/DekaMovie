@@ -1,6 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-
-namespace DekaMovie;
+﻿namespace DekaMovie;
 
 public static class MauiProgram
 {
@@ -9,10 +7,16 @@ public static class MauiProgram
 		var builder = MauiApp.CreateBuilder();
 		builder
 			.UseMauiApp<App>()
+			.RegisterService()
+			.RegisterServiceViewModel()
 			.ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+			})
+			.UseMauiCommunityToolkit(static options =>
+			{
+				options.SetShouldEnableSnackbarOnWindows(true);
 			});
 
 #if DEBUG

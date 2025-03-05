@@ -1,8 +1,8 @@
 namespace DekaMovie.Features;
 
-public partial class HomePage : ContentPage
+public partial class SearchPage : ContentPage
 {
-	public HomePage(HomeViewModel viewModel)
+	public SearchPage(SearchViewModel viewModel)
 	{
 		InitializeComponent();
         BindingContext = viewModel;
