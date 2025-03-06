@@ -3,23 +3,22 @@
     x:Class="DekaMovie.AppShell"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:core="clr-namespace:DekaMovie"
     xmlns:local="clr-namespace:DekaMovie.Features"
     Title="DekaMovie"
+    x:DataType="core:AppShellViewModel"
     Shell.FlyoutBehavior="Flyout">
 
     <ShellContent
-        Title="Login"
         ContentTemplate="{DataTemplate local:LoginPage}"
-        Route="LoginPage" />
+        Route="LoginPage"
+        Shell.FlyoutBehavior="Disabled"
+        Shell.FlyoutItemIsVisible="False" />
 
     <ShellContent
-        Title="Home"
-        ContentTemplate="{DataTemplate local:HomePage}"
-        Route="MainPage" />
+        Title="Buscar Filmes"
+        ContentTemplate="{DataTemplate local:MoviePage}"
+        Route="MoviePage" />
 
-    <ShellContent
-        Title="Search"
-        ContentTemplate="{DataTemplate local:SearchPage}"
-        Route="SearchPage" />
-
+    <MenuFlyoutItem Command="{Binding LogoutCommand}" Text="Logout" />
 </Shell>

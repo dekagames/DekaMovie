@@ -1,15 +1,18 @@
 ﻿namespace DekaMovie;
-
 public partial class App : Application
 {
-    public App()
+    readonly ITmdbApiService _tmdb;    
+    readonly ILoginService _loginService;
+    
+    public App(ITmdbApiService tmdb, ILoginService loginService)
     {
         InitializeComponent();
-        BaseService.InitializeAsync().Wait();
+        _tmdb = tmdb;
+        _loginService = loginService;
     }
 
     protected override Window CreateWindow(IActivationState? activationState)
     {
-        return new Window(new AppShell());
-    }
+        return new Window(new AppShell(_tmdb, _loginService));
+    }   
 }

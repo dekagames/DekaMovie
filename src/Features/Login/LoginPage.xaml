@@ -3,7 +3,8 @@
     x:Class="DekaMovie.Features.LoginPage"
     xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    Title="LoginPage">
+    xmlns:local="clr-namespace:DekaMovie.Features;assembly=DekaMovie"
+    x:DataType="local:LoginViewModel">
     <VerticalStackLayout
         Padding="20"
         Spacing="15"
@@ -14,6 +15,8 @@
             HorizontalOptions="Center"
             Text="Bem-vindo ao Busca Filmes" />
 
-        <Button Command="{Binding LoginCommand}" Text="Entrar com TMDb" />
+        <Button Command="{Binding LoginGuestCommand}" Text="Entrar como Convidado TMDb" />
+        <!--<Button Command="{Binding LoginCommand}" Text="Entrar com TMDb" />-->
+
     </VerticalStackLayout>
 </ContentPage>

@@ -1,35 +1,53 @@
 ﻿namespace DekaMovie.Features;
 
 public interface ILoginService
-{    
+{
     Task<string> GetTokenAsync();
     Task<string> GetSessionIdAsync(string requestToken);
+    Task<bool> LogoutSessionAsync();
+    Task<string> GuestSessionIdAsync();
 }
 
-public class LoginService(IApiRestfull api) : ILoginService
+public class LoginService(ITmdbApiService api) : ILoginService
 {
-    readonly IApiRestfull _api = api;
+    readonly ITmdbApiService _api = api;
+    readonly IPreferences _preferences = Preferences.Default;
 
     public async Task<string> GetTokenAsync()
     {
         var result = await _api.GetRequestTokenAsync();
         return result != null ? result?.RequestToken! : null!;
-    } 
+    }
 
     public async Task<string> GetSessionIdAsync(string requestToken)
     {
-        if (string.IsNullOrWhiteSpace(BaseService.BaseUrl) || string.IsNullOrWhiteSpace(BaseService.ApiKey))
-            BaseService.InitializeAsync().Wait();
+        var result = await _api.CreateSessionAsync(requestToken);
+                
+        return result != null ? result?.SessionId! : null!;
+    }
 
-        var url = $"{BaseService.BaseUrl}/authentication/session/new?api_key={BaseService.ApiKey}";
+    public async Task<string> GuestSessionIdAsync()
+    {
+        var result = await _api.CreateGuestSessionAsync();
 
-        var content = JsonSerializer.Serialize(new { request_token = requestToken });
-        //var response = await _httpClient.PostAsync(url, new StringContent(content));
+        return result != null ? result?.GuestSessionId! : null!;
+    }
 
-        //if (!response.IsSuccessStatusCode) return null;
-        //var json = await response.Content.ReadAsStringAsync();
-        //var result = JsonSerializer.Deserialize<SessionResponse>(json);
-        //        return result?.SessionId!;
-        return url;
+    public async Task<int> GetAccountId()
+    {
+        var result = await _api.GetAccountDetails();
+
+        return result.Id; 
+    }
+
+    public async Task<bool> LogoutSessionAsync()
+    {
+        string sessionId = _preferences.Get("SessionId", string.Empty);
+        if (!string.IsNullOrEmpty(sessionId))
+        {
+            var result = await _api.DeleteSessionAsync(sessionId);
+            return result.Sucess;
+        }
+        return false;
     }
 }
