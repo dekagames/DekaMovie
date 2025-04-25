@@ -28,6 +28,24 @@ public partial class LoginViewModel(ILoginService loginService) : BaseViewModel
     }
 
     [RelayCommand]
+    async Task LoginGuestAsync()
+    {
+        try
+        {
+            var guestSessionId = await _loginService.GuestSessionIdAsync();
+            if (string.IsNullOrEmpty(guestSessionId)) return;
+
+            _preferences.Set("GuestSessionId", guestSessionId);           
+            
+            await Shell.Current.GoToAsync($"//{nameof(MoviePage)}"); 
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine($"Erro ao autenticar: {ex.Message}");
+        }
+    }
+
+    [RelayCommand]
     async Task CheckSessionAsync()
     {
         try
@@ -39,7 +57,8 @@ public partial class LoginViewModel(ILoginService loginService) : BaseViewModel
             if (!string.IsNullOrEmpty(sessionId))
             {
                 _preferences.Set("SessionId", sessionId);
-                await Shell.Current.GoToAsync(nameof(SearchPage));
+                
+                await Shell.Current.GoToAsync("//SearchPage");
             }        
         }
         catch (Exception ex)

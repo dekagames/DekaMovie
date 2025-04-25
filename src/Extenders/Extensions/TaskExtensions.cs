@@ -1,4 +1,6 @@
-﻿namespace DekaMovie.Extensions;
+﻿using DekaMovie.Helpers;
+
+namespace DekaMovie.Extenders.Extensions;
 public static class TaskExtensions
 {
     public const string NoInternetConnection = "Something went wrong with the internet connection, please try again later.";

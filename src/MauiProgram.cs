@@ -8,8 +8,8 @@ public static class MauiProgram
 		builder
 			.UseMauiApp<App>()
 			.RegisterService()
-			.RegisterServiceViewModel()
-			.ConfigureFonts(fonts =>
+			.RegisterServiceViewModel()            
+            .ConfigureFonts(fonts =>
 			{
 				fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
 				fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");

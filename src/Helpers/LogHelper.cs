@@ -1,5 +1,4 @@
-﻿namespace DekaMovie.Infra;
-
+﻿namespace DekaMovie.Helpers;
 public static class LogHelper
 {
     public static void Log(string TAG, Exception ex)

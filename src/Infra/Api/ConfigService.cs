@@ -22,6 +22,6 @@ public static class ConfigService
 
         using var reader = new StreamReader(stream);
         
-        return JsonSerializer.Deserialize<AppSettings>(await reader.ReadToEndAsync())!;
+        return System.Text.Json.JsonSerializer.Deserialize<AppSettings>(await reader.ReadToEndAsync())!;
     }
 }
