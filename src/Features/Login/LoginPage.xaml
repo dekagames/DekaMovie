@@ -12,7 +12,7 @@
             FontAttributes="Bold"
             FontSize="24"
             HorizontalOptions="Center"
-            Text="Bem-vindo ao Busca Filmes" />
+            Text="Bem-vindo ao Busca Filmes 5 " />
 
         <Button Command="{Binding LoginCommand}" Text="Entrar com TMDb" />
     </VerticalStackLayout>
